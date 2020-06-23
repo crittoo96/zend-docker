@@ -1,0 +1,23 @@
+version: "3"
+
+services:
+  web:
+    container_name: web
+    build: ./php
+    volumes:
+      - "./php/php.ini:/usr/local/etc/php/php.ini"
+      - "./server:/var/www/html"
+      - "./php/000-default.conf:/etc/apache2/sites-enabled/000-default.conf"
+      - "./php/.htaccess:/var/www/html/public/.htaccess"
+    ports:
+      - 8081:80
+  mysql:
+    container_name: db-host
+    image: mysql:5.7
+    volumes:
+      - ./mysql:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=test
+      - MYSQL_USER=test
+      - MYSQL_PASSWORD=test
