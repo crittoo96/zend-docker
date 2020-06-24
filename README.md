@@ -29,7 +29,7 @@ $docker-compose build
 $docker-compose up -d
 ```
 
--> http://localhost:8081
+-> http://localhost:8081　で閲覧可能！
  
 ## Note
  
