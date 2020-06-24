@@ -1,4 +1,11 @@
 # zend-docker
+ZendFramework 1.12.19をdockerで動かすプロジェクト。
+
+- [x] php-apacheの設定から表示(.htaccess, php.ini, httpd-conf)
+- [] gitからcloneする設定
+- [] mysqlの設定
+- [] composerの設定とcomposer installの実行（プロジェクト内のcomposer.jsonの実行）
+- [] DB-migrationの設定、initialize.sqlの実行
  
 ## DEMO
  
