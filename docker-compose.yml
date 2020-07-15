@@ -6,18 +6,31 @@ services:
     build: ./php
     volumes:
       - "./php/php.ini:/usr/local/etc/php/php.ini"
-      - "./server:/var/www/html"
+      - "./zf1-developer-example:/var/www/html"
       - "./php/000-default.conf:/etc/apache2/sites-enabled/000-default.conf"
       - "./php/.htaccess:/var/www/html/public/.htaccess"
     ports:
       - 8081:80
   mysql:
-    container_name: db-host
-    image: mysql:5.7
+    container_name: mysql_host
+    build: ./mysql/
     volumes:
-      - ./mysql:/var/lib/mysql
+      # - ./mysql:/var/lib/mysql
+      - ./mysql/db:/docker-entrypoint-initdb.d
     environment:
       - MYSQL_ROOT_PASSWORD=root
-      - MYSQL_DATABASE=test
-      - MYSQL_USER=test
-      - MYSQL_PASSWORD=test
+      - MYSQL_DATABASE=zf
+      - MYSQL_USER=zf
+      - MYSQL_PASSWORD=password
+      - TZ='Asia/Tokyo'
+
+  phpmyadmin:
+    container_name: test_phpmyadmin
+    image: phpmyadmin/phpmyadmin
+    environment:
+    - PMA_ARBITRARY=1
+    - PMA_HOSTS=mysql_host
+    - PMA_USER=root
+    - PMA_PASSWORD=root
+    ports:
+    - 8082:80
